@@ -5,7 +5,7 @@ import org.testng.annotations.Parameters;
 
 public class ParantClass {
 	
-	@Parameters({"browser"})
+	//@Parameters({"browser"})
 	@BeforeMethod
 	public void setup(String browsername) {
 		System.out.println("Browsername:: "+browsername);
