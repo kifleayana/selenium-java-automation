@@ -4,7 +4,7 @@ import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
-
+import java.awt.Desktop;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
@@ -82,6 +82,22 @@ public class TestBase {
 		driver.close();
 		extentReports.flush();
 	}
+	/**
+	 * This method open the Extent report generated in a default browser after suite
+	 * execution completed.
+	 * 
+	 */
+	@AfterSuite
+	public void SuiteClose() {
+		File file = new File(reportFilePath);
+		Desktop desktop = Desktop.getDesktop();
+		try {
+			desktop.browse(file.toURI());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	}
 
 
