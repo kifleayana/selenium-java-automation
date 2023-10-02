@@ -54,7 +54,7 @@ public class TestBase {
 		} else if("firefox".equals(driverType)) {
 			WebDriverManager.firefoxdriver().setup();
 			driver = new FirefoxDriver();
-		} else if("edge".equals(browser)) {
+		} else if("edge".equals(driverType)) {
 			WebDriverManager.edgedriver().setup();
 			driver = new EdgeDriver();
 		}
