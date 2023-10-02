@@ -54,7 +54,12 @@ public class TestBase {
 		} else if("firefox".equals(driverType)) {
 			WebDriverManager.firefoxdriver().setup();
 			driver = new FirefoxDriver();
+		} else if("edge".equals(browser)) {
+			WebDriverManager.edgedriver().setup();
+			driver = new EdgeDriver();
 		}
+
+		
 		driver.manage().window().maximize();
 		driver.manage().timeouts().implicitlyWait(40, TimeUnit.SECONDS);
 		//.get(LoadProps.getData("url"));
