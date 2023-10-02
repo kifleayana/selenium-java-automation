@@ -8,6 +8,7 @@ import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -16,6 +17,8 @@ import org.testng.annotations.Parameters;
 
 import com.relevantcodes.extentreports.ExtentReports;
 import com.relevantcodes.extentreports.ExtentTest;
+
+import io.github.bonigarcia.wdm.WebDriverManager;
 
 
 
@@ -40,15 +43,15 @@ public class TestBase {
 
 		System.out.println("Print driverType:: "+driverType);
 		
-		if (driverType.equals("chrome")) {
-			System.setProperty("webdriver.chrome.driver", "../selenium-java-automation/Drivers/chromedriver.exe");
+		if ("chrome".equals(driverType)) {
+			WebDriverManager.chromedriver().setup();
 			driver = new ChromeDriver();
-		} else if (driverType.equals("ie")) {
-			System.setProperty("webdriver.ie.driver", "../selenium-java-automation/Drivers/IEDriverServer.exe");
+		} else if("ie".equals(driverType)) {
+			WebDriverManager.iedriver().setup();
 			driver = new InternetExplorerDriver();
-		} else if (driverType.equals("edge")) {
-			System.setProperty("webdriver.edge.driver", "../selenium-java-automation/Drivers/msedgedriver.exe");
-			driver = new EdgeDriver();
+		} else if("firefox".equals(driverType)) {
+			WebDriverManager.firefoxdriver().setup();
+			driver = new FirefoxDriver();
 		}
 		driver.manage().window().maximize();
 		driver.manage().timeouts().implicitlyWait(40, TimeUnit.SECONDS);
