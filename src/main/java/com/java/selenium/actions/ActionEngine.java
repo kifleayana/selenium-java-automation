@@ -14,6 +14,7 @@ import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Select;
@@ -30,14 +31,15 @@ public class ActionEngine extends TestBase {
 		boolean flag = false;
 		try {
 			driver.findElement(locator).click();
-			//flag = true;
+			// flag = true;
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			if (flag) {
 				extentTest.log(LogStatus.PASS, "Successfully clicked on " + locatorName);
 			} else {
-				extentTest.log(LogStatus.FAIL, "Failed to click on " + locatorName+extentTest.addScreenCapture(getScreenshot(locatorName)));
+				extentTest.log(LogStatus.FAIL,
+						"Failed to click on " + locatorName + extentTest.addScreenCapture(getScreenshot(locatorName)));
 			}
 
 		}
@@ -114,23 +116,47 @@ public class ActionEngine extends TestBase {
 		Alert alert = wait.until(ExpectedConditions.alertIsPresent());
 		alert.sendKeys(str);
 	}
-	
+
 	public static String getScreenshot(String screenshotName) throws Throwable {
 		String screenshotLocation = System.getProperty("user.dir");
 		try {
 			String dateName = new SimpleDateFormat("yyyyMMddhhmmss").format(new Date());
-			TakesScreenshot ts =(TakesScreenshot)driver;
+			TakesScreenshot ts = (TakesScreenshot) driver;
 			File source = ts.getScreenshotAs(OutputType.FILE);
-			screenshotLocation= screenshotLocation+File.separator+ "FailedScreenShots"+File.separator + screenshotName+ dateName + ".png";
+			screenshotLocation = screenshotLocation + File.separator + "FailedScreenShots" + File.separator
+					+ screenshotName + dateName + ".png";
 			File finalDestination = new File(screenshotLocation);
 			FileUtils.copyFile(source, finalDestination);
-			
-		}catch(Exception e) {
+
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 		return screenshotLocation;
 	}
-	
+
+	public void doubleClick(By locator, String locatorname) {
+		try {
+
+			Actions actions = new Actions(driver);
+			actions.doubleClick(driver.findElement(locator)).perform();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+	}
+
+	public void contextClick(By locator, String locatorname) {
+		try {
+
+			Actions actions = new Actions(driver);
+			actions.contextClick(driver.findElement(locator)).perform();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+	}
 
 }
