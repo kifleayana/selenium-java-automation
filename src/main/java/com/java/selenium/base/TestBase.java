@@ -54,7 +54,12 @@ public class TestBase {
 		} else if("firefox".equals(driverType)) {
 			WebDriverManager.firefoxdriver().setup();
 			driver = new FirefoxDriver();
+		} else if("edge".equals(driverType)) {
+			WebDriverManager.edgedriver().setup();
+			driver = new EdgeDriver();
 		}
+
+		
 		driver.manage().window().maximize();
 		driver.manage().timeouts().implicitlyWait(40, TimeUnit.SECONDS);
 		//.get(LoadProps.getData("url"));
@@ -64,7 +69,7 @@ public class TestBase {
 		
 		//driver.findElement(By.id("permanentAddress")).sendKeys("MD, UAS");
 		//driver.findElement(By.xpath("//button[@id='submit']")).click();
-		driver.get("https://demoqa.com/alerts");
+		driver.get("https://demoqa.com/buttons");
 		//driver.findElement(By.id("id='userName'")).sendKeys("kifle");
 		//driver.findElement(By.id("id='userEmail'")).sendKeys("Kifle@kifle");
 		//driver.findElement(By.id("id='currentAddress'")).sendKeys("147 Kentucky st.,Upper Marlboro,21980,MD,USA");
@@ -81,7 +86,7 @@ public class TestBase {
 	
 	@AfterMethod
 	public void rearDown() throws Throwable{
-		driver.close();
+		//driver.close();
 		extentReports.flush();
 	}
 	/**
