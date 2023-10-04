@@ -3,12 +3,14 @@ package com.java.selenium.actions;
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.time.Duration;
+import java.util.ArrayList;
 import java.util.Date;
 
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -26,12 +28,18 @@ import com.java.selenium.base.TestBase;
 import com.relevantcodes.extentreports.LogStatus;
 
 public class ActionEngine extends TestBase {
+	
+	public WebElement getWebElement(By locator) {
+		WebElement we = driver.findElement(locator);
+		return we;
+		
+	}
 
 	public void click(By locator, String locatorName) throws Throwable {
 		boolean flag = false;
 		try {
 			driver.findElement(locator).click();
-			// flag = true;
+			flag = true;
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -140,6 +148,12 @@ public class ActionEngine extends TestBase {
 
 			Actions actions = new Actions(driver);
 			actions.doubleClick(driver.findElement(locator)).perform();
+			
+			actions.sendKeys(Keys.CONTROL);
+			actions.sendKeys("a");
+			actions.sendKeys(Keys.CONTROL);
+			actions.sendKeys("c");
+			actions.sendKeys(Keys.SPACE);
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -149,7 +163,7 @@ public class ActionEngine extends TestBase {
 
 	public void contextClick(By locator, String locatorname) {
 		try {
-
+			// contextClick is nothing but right clicking
 			Actions actions = new Actions(driver);
 			actions.contextClick(driver.findElement(locator)).perform();
 
@@ -157,6 +171,15 @@ public class ActionEngine extends TestBase {
 			e.printStackTrace();
 		}
 
+	}
+	
+	public void switchToSecondWindow() {
+		
+		//String parentWindow = driver.getWindowHandle();
+		ArrayList<String> windowsList = new ArrayList<String>(driver.getWindowHandles());
+		if(windowsList.size() > 1) {
+			driver.switchTo().window(windowsList.get(1));
+		}
 	}
 
 }

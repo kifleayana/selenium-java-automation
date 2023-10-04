@@ -6,18 +6,17 @@ import com.java.selenium.actions.ActionEngine;
 import com.java.selenium.pages.ButtonsPage;
 
 public class ButtonsTest extends ActionEngine {
+	ButtonsPage buttonsPage = new ButtonsPage();
 	
 	@Test
 	public void validateDoubleClick() {
 		
-		ButtonsPage buttonsPage = new ButtonsPage();
 		buttonsPage.doubleClick();
 	}
 	
 	@Test
 	public void validateRightClick() {
 		
-		ButtonsPage buttonsPage = new ButtonsPage();
 		buttonsPage.contextClick();
 	}
 

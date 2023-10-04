@@ -69,7 +69,7 @@ public class TestBase {
 		
 		//driver.findElement(By.id("permanentAddress")).sendKeys("MD, UAS");
 		//driver.findElement(By.xpath("//button[@id='submit']")).click();
-		driver.get("https://demoqa.com/buttons");
+		driver.get("https://demoqa.com/browser-windows");
 		//driver.findElement(By.id("id='userName'")).sendKeys("kifle");
 		//driver.findElement(By.id("id='userEmail'")).sendKeys("Kifle@kifle");
 		//driver.findElement(By.id("id='currentAddress'")).sendKeys("147 Kentucky st.,Upper Marlboro,21980,MD,USA");
