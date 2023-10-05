@@ -181,5 +181,10 @@ public class ActionEngine extends TestBase {
 			driver.switchTo().window(windowsList.get(1));
 		}
 	}
+	
+	public void switchToFrame(String frameNumber) {
+		
+			driver.switchTo().frame(frameNumber);
+	}
 
 }
