@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.Alert;
@@ -185,6 +186,31 @@ public class ActionEngine extends TestBase {
 	public void switchToFrame(String frameNumber) {
 		
 			driver.switchTo().frame(frameNumber);
+	}
+	
+	// table:  //div[@class='rt-table']
+	// table Body: //div[@class='rt-tbody']
+	// tr: //div[@class='rt-tr-group']
+	// td: //div[@class='rt-td']
+	
+	public void tableData(By tableLocator, By tableBody, By tableRows, By td) {
+		WebElement table = getWebElement(tableLocator);
+		
+		List<WebElement> tableBodys = table.findElements(tableBody);
+		WebElement tableBd = tableBodys.get(0);
+		
+		List<WebElement> tableRS = tableBd.findElements(tableRows);
+		
+		for(WebElement we : tableRS) {
+			List<WebElement> tableTD = we.findElements(td);
+			for(WebElement data : tableTD) {
+				String dt = data.getText();
+				if(!dt.trim().isEmpty())
+				System.out.print(dt+" ");
+			}
+			System.out.println();
+		}
+		
 	}
 
 }
